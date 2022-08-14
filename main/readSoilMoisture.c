@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include <esp_log.h>
@@ -6,43 +5,7 @@
 
 
 #define SOIL_SAMPLE_SIZE 500
-/*
-void task1(void *arg)
-{
-    while(1)
-    {
-        static const char *TAG = "log1";
-        int *value = (int *) arg;
-        int num = 1, *test=&num;
-        ESP_LOGI(TAG, "hello from task1, testptr is %d\n", *test);
 
-
-        //printf("hello from task1, value is %d\n", *value);
-        ESP_LOGI(TAG, "hello from task1, value is %d\n", *value);
-        (*value)++;
-        //(*(int *)arg)++;
-        if (*value == 16){
-        //if( myTask1Handle != NULL ){
-                vTaskDelete(NULL);
-                //printf("byebye task1!");
-                ESP_LOGI(TAG, "byebye task1!");
-
-        //    }
-        }
-        vTaskDelay(1000/portTICK_RATE_MS);
-        
-    }
-}
-
-void task2(void *arg)
-{
-    while(1)
-    {
-        printf("hello from task2\n");
-        vTaskDelay(1000/portTICK_RATE_MS);
-    }
-}
-*/
 void readSoilMoisture(void *ptrToSoilMoisture)
 {
     static const char *TAG = "adc1"; //declare tag for log
