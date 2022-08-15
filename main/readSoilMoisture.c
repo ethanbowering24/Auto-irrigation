@@ -1,26 +1,25 @@
+#include <esp_log.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include <esp_log.h>
-#include <driver/adc.h>
+#include "soilZones.h" //soilZones.h includes settings.h which includes adc.h
 
-
-#define SOIL_SAMPLE_SIZE 500
-
-void readSoilMoisture(void *ptrToSoilMoisture)
+void readSoilMoisture(void *zoneParam)
 {
+    zone_t *zone = (zone_t *)zoneParam; //cast void pointer to zone structure pointer
+
     static const char *TAG = "adc1"; //declare tag for log
     int reading = 0; //int to store readings
     int sum = 0; //int to store sum of readings
 
     //ADC setup
     ESP_LOGD(TAG, "starting ADC1");
-    adc1_config_width(ADC_WIDTH_12Bit);
-    adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_11db);
+    adc1_config_width(ADC_WIDTH_9Bit); //12 bits gives large fluctuations and I don't believe that level of precision is needed anyways.
+    adc1_config_channel_atten(zone->sensorPin, ADC_ATTEN_11db);
 
     //Read soil moisture
     for (int i = 0; i < SOIL_SAMPLE_SIZE; i++)
     {
-        reading = adc1_get_raw(ADC_CHANNEL_0);
+        reading = adc1_get_raw(zone->sensorPin);
         ESP_LOGD(TAG, "reading is: %d", reading);
         sum += reading;
 
@@ -28,6 +27,8 @@ void readSoilMoisture(void *ptrToSoilMoisture)
     }
     
     //return average and delete
-    *(int *)ptrToSoilMoisture = sum/SOIL_SAMPLE_SIZE;
+    //*(int *)ptrToSoilMoisture = sum/SOIL_SAMPLE_SIZE;
+    zone->soilMoisture = sum/SOIL_SAMPLE_SIZE;
+
     vTaskDelete(NULL);
 }

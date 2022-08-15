@@ -1,9 +1,7 @@
 #include "settings.h"
 
-void readSoilMoisture(void *); //declares function found in
+void readSoilMoisture(void *); 
 void moistenSoil(void *);
-
-extern int pinNums[MAX_NUM_ZONES][2];
 
 typedef struct
 {
@@ -11,7 +9,10 @@ typedef struct
     int soilMoisture;
     int sensorPin;
     int valvePin;
+    int wateringThreshold;
+    char pcName[28];
 
 } zone_t;
 
 extern zone_t zones[NUM_ZONES];
+extern int zoneValues[MAX_NUM_ZONES][3];
