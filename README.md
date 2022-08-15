@@ -1,8 +1,8 @@
-# Auto Irrigation
+# Auto irrigation
 
 This is an ESP-32 based project that will check soil moisture, air temperature, air humidity and open a water valve if the soil is dry enough to need water. In development.
 
-# Parts List
+# Parts list
 1x FireBeetle 2 ESP32-E IoT Microcontroller (https://www.dfrobot.com/product-2195.html)
 
 1x Gravity: Analog Waterproof Capacitive Soil Moisture Sensor (https://www.dfrobot.com/product-2054.html)
