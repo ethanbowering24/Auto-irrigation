@@ -1,7 +1,5 @@
 #include <esp_log.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "soilZones.h" //soilZones.h includes settings.h which includes adc.h
+#include "include/soilZones.h" //soilZones.h includes settings.h which includes adc.h
 
 void readSoilMoisture(void *voidZonePtr)
 {

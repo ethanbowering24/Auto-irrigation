@@ -1,4 +1,8 @@
-#include "settings.h"
+#pragma once
+
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "include/settings.h"
 
 void readSoilMoisture(void *); 
 void moistenSoil(void *);
