@@ -1,6 +1,9 @@
-#include <stdio.h>
 #include <esp_log.h>
 #include "include/soilZones.h"
+
+#if !NUM_ZONES
+    #error "You must have at least one zone setup"
+#endif
 
 void app_main(void)
 {   
