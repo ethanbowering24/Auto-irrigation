@@ -33,3 +33,5 @@ This is an ESP-32 based project that will check soil moisture, air temperature, 
 
 # Building
 Build and flash using ESP-IDF
+
+test
