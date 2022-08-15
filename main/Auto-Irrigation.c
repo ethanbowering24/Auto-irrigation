@@ -23,6 +23,7 @@ void app_main(void)
         zones[i].valvePin = zoneValues[i][1];
         zones[i].wateringThreshold = zoneValues[i][2];
         snprintf(zones[i].pcName, 18, "readSoilMoisture%c", i);
+        zones[i].zoneEnabled = 1;
     }
 
     static const char *TAG = "main";

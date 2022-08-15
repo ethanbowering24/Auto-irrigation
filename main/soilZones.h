@@ -11,6 +11,7 @@ typedef struct
     int valvePin;
     int wateringThreshold;
     char pcName[28];
+    bool zoneEnabled;
 
 } zone_t;
 

@@ -1,6 +1,7 @@
 #include <driver/adc.h>
 
 /*---------------------------------------------Settings for soil zones---------------------------------------------*/
+//You must wire up your zone sensors sequentially.
 #define SOIL_SAMPLE_SIZE 500
 #define NUM_ZONES 1
 #define MAX_NUM_ZONES 4 
