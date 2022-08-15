@@ -30,3 +30,6 @@ This is an ESP-32 based project that will check soil moisture, air temperature, 
 1x Voltage booster for valve (undecided)
 
 1x Lithium ion battery (undecided)
+
+# Building
+Build and flash using ESP-IDF

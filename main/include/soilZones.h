@@ -2,6 +2,7 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include <driver/adc.h>
 #include "include/settings.h"
 
 void readSoilMoisture(void *); 
@@ -15,7 +16,7 @@ typedef struct
     int valvePin;
     int wateringThreshold;
     bool zoneEnabled;
-    char pcName[28];
+    char pcName[18];
 } zone_t;
 
 extern zone_t zones[NUM_ZONES];
