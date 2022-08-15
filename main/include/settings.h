@@ -1,10 +1,10 @@
 #pragma once
 
 /*---------------------------------------------Settings for soil zones---------------------------------------------*/
-//You must wire up your zone sensors sequentially.
+//You must wire up your zone sensors sequentially starting from 0.
 #define SOIL_SAMPLE_SIZE 500
 #define NUM_ZONES 1
-#define MAX_NUM_ZONES 4 
+#define MAX_NUM_ZONES 4 //You can set up to 4 zones (0-3) without modifying code.
 
 #define SOIL_SENSOR_0 ADC1_CHANNEL_0 //GPIO 36
 #define SOIL_VALVE_0 10
