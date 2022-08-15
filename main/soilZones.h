@@ -10,9 +10,8 @@ typedef struct
     int sensorPin;
     int valvePin;
     int wateringThreshold;
-    char pcName[28];
     bool zoneEnabled;
-
+    char pcName[28];
 } zone_t;
 
 extern zone_t zones[NUM_ZONES];
