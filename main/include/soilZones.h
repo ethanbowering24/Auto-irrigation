@@ -1,8 +1,8 @@
 #pragma once
 
+#include <driver/adc.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include <driver/adc.h>
 #include "include/settings.h"
 
 void readSoilMoisture(void *); 
