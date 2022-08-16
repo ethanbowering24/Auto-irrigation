@@ -1,4 +1,5 @@
 #pragma once
+#include <driver/adc.h>
 
 /*---------------------------------------------Settings for soil zones---------------------------------------------*/
 //You must wire up your zone sensors sequentially.

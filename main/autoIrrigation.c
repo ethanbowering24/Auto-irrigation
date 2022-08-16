@@ -1,8 +1,18 @@
 #include <esp_log.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "include/settings.h"
 #include "include/soilZones.h"
+#include "include/localWeather.h"
 
 #if !NUM_ZONES
     #error "You must have at least one zone setup"
+#endif
+
+#ifdef SHT30_ENABLE
+
+    #include "include/localWeather.h"
+
 #endif
 
 void app_main(void)
@@ -27,6 +37,14 @@ void app_main(void)
         zones[i].zoneEnabled = 1;
         snprintf(zones[i].pcName, 18, "readSoilMoisture%c", i);
     }
+
+    #ifdef SHT30_ENABLE
+
+        localWeather_t localWeather;
+        localWeather.localHumid = 0;
+        localWeather.localTemp = 0;
+
+    #endif
 
     //start logging and read soil moisture test
     static const char *TAG = "main";

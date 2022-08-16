@@ -1,2 +1,2 @@
-idf_component_register(SRCS "checkWeather.c" "moistenSoil.c" "readSoilMoisture.c" "autoIrrigation.c"
+idf_component_register(SRCS "soilZones.c" "localWeather.c" "autoIrrigation.c"
                     INCLUDE_DIRS ".")
