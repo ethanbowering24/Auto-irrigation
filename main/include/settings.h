@@ -4,7 +4,7 @@
 
 /*---------------------------------------------Settings for soil zones---------------------------------------------*/
 //You must connect your zone sensors sequentially (If NUM_ZONES = 3 you must use 0, 1 and 2 and not 0, 2 and 3).
-#define NUM_ZONES 1
+#define NUM_ZONES 4
 
 #define SOIL_SENSOR_0 ADC1_CHANNEL_0 //GPIO 36
 #define SOIL_VALVE_0 GPIO_NUM_10

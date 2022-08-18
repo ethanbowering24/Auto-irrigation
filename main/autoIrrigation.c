@@ -20,15 +20,17 @@
 
 void app_main(void)
 {   
+    gpio_config_t output_config;
+
     #if NUM_ZONES == 1
-        #define BIT_MASK (1ULL<<SOIL_VALVE_0)
+        output_config.pin_bit_mask = (1ULL<<SOIL_VALVE_0);
         
         int zoneValues[NUM_ZONES][3] = {
             {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0}
         };
 
     #elif NUM_ZONES == 2
-        #define BIT_MASK (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1)
+        output_config.pin_bit_mask = (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1);
 
         int zoneValues[NUM_ZONES][3] = {
             {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0},
@@ -36,7 +38,7 @@ void app_main(void)
         };
 
     #elif NUM_ZONES == 3
-        #define BIT_MASK (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1) | (1ULL<<SOIL_VALVE_2)
+        output_config.pin_bit_mask = (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1) | (1ULL<<SOIL_VALVE_2);
 
         int zoneValues[NUM_ZONES][3] = {
             {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0},
@@ -45,7 +47,7 @@ void app_main(void)
             };
 
     #elif NUM_ZONES == 4
-        #define BIT_MASK (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1) | (1ULL<<SOIL_VALVE_2) | (1ULL<<SOIL_VALVE_3)
+        output_config.pin_bit_mask = (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1) | (1ULL<<SOIL_VALVE_2) | (1ULL<<SOIL_VALVE_3);
 
         int zoneValues[NUM_ZONES][3] = {
             {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0},
@@ -53,11 +55,7 @@ void app_main(void)
             {SOIL_SENSOR_2, SOIL_VALVE_2, WATERING_THRESHOLD_2},
             {SOIL_SENSOR_3, SOIL_VALVE_3, WATERING_THRESHOLD_3}
         };
-    #endif
-
-    gpio_config_t output_config;
-    output_config.pin_bit_mask = BIT_MASK;
-
+    #endif;
     //zone initialization
     zone_t zones[NUM_ZONES];
     for (int i = 0; i < NUM_ZONES; i++)
