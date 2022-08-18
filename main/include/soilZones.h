@@ -19,4 +19,4 @@ typedef struct
 } zone_t;
 
 extern zone_t zones[NUM_ZONES];
-extern int zoneValues[MAX_NUM_ZONES][3];
+extern int zoneValues[NUM_ZONES][3];

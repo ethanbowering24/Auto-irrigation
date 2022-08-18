@@ -14,25 +14,48 @@
 
 #if NUM_ZONES < 1
     #error "You must have at least one zone setup"
-#endif
-
-#if NUM_ZONES > 4
+#elif NUM_ZONES > 4
     #error "This program only supports up to 4 zones, make sure to add more yourself and remove this compilation guard"
 #endif
 
-
-
 void app_main(void)
 {   
-    //array that holds values of physical pins on ESP board and watering threshold, defined in settings.h
-    //expand this array with more rows to gain additional zone capability and add new defines in settings.h
-    int zoneValues[MAX_NUM_ZONES][3] = {
-        {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0},
-        {SOIL_SENSOR_1, SOIL_VALVE_1, WATERING_THRESHOLD_1},
-        {SOIL_SENSOR_2, SOIL_VALVE_2, WATERING_THRESHOLD_2},
-        {SOIL_SENSOR_3, SOIL_VALVE_3, WATERING_THRESHOLD_3}
-    };
-    uint64_t pinBitMask = 0;
+    #if NUM_ZONES == 1
+        #define BIT_MASK (1ULL<<SOIL_VALVE_0)
+        
+        int zoneValues[NUM_ZONES][3] = {
+            {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0}
+        };
+
+    #elif NUM_ZONES == 2
+        #define BIT_MASK (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1)
+
+        int zoneValues[NUM_ZONES][3] = {
+            {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0},
+            {SOIL_SENSOR_1, SOIL_VALVE_1, WATERING_THRESHOLD_1}
+        };
+
+    #elif NUM_ZONES == 3
+        #define BIT_MASK (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1) | (1ULL<<SOIL_VALVE_2)
+
+        int zoneValues[NUM_ZONES][3] = {
+            {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0},
+            {SOIL_SENSOR_1, SOIL_VALVE_1, WATERING_THRESHOLD_1},
+            {SOIL_SENSOR_2, SOIL_VALVE_2, WATERING_THRESHOLD_2}
+            };
+
+    #elif NUM_ZONES == 4
+        #define BIT_MASK (1ULL<<SOIL_VALVE_0) | (1ULL<<SOIL_VALVE_1) | (1ULL<<SOIL_VALVE_2) | (1ULL<<SOIL_VALVE_3)
+
+        int zoneValues[NUM_ZONES][3] = {
+            {SOIL_SENSOR_0, SOIL_VALVE_0, WATERING_THRESHOLD_0},
+            {SOIL_SENSOR_1, SOIL_VALVE_1, WATERING_THRESHOLD_1},
+            {SOIL_SENSOR_2, SOIL_VALVE_2, WATERING_THRESHOLD_2},
+            {SOIL_SENSOR_3, SOIL_VALVE_3, WATERING_THRESHOLD_3}
+        };
+    #endif
+
+    uint64_t pinBitMask = BIT_MASK;
 
     //zone initialization
     zone_t zones[NUM_ZONES];
