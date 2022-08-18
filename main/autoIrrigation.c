@@ -27,6 +27,9 @@ void app_main(void)
         {SOIL_SENSOR_3, SOIL_VALVE_3, WATERING_THRESHOLD_3}
     };
 
+    gpio_config_t output_config;
+    output_config.pin_bit_mask = 0;
+
     //zone initialization
     zone_t zones[NUM_ZONES];
     for (int i = 0; i < NUM_ZONES; i++)
@@ -38,6 +41,7 @@ void app_main(void)
         zones[i].wateringThreshold = zoneValues[i][2];
         zones[i].zoneEnabled = 1;
         snprintf(zones[i].pcName, 18, "readSoilMoisture%c", i);
+        output_config.pin_bit_mask |= (1ULL<<(zones[i].valvePin));
     }
 
     #ifdef SHT30_ENABLE
