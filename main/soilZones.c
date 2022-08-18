@@ -1,16 +1,14 @@
-#include "include/soilZones.h" 
-#include "include/settings.h"
+#include "include/soilZones.h" //soilZones.h includes settings.h which includes adc.h
 #include <esp_log.h>
 #include <driver/adc.h>
-#include <driver/gpio.h>
 
 void readSoilMoisture(void *voidZonePtr)
 {
     zone_t *zonePtr = (zone_t *)voidZonePtr; //cast void pointer to zone structure pointer
 
-    static const char *TAG = "adc1"; 
-    int reading = 0; 
-    int sum = 0; 
+    static const char *TAG = "adc1"; //declare tag for log
+    int reading = 0; //int to store readings
+    int sum = 0; //int to store sum of readings
 
     //ADC setup
     ESP_LOGD(TAG, "starting ADC1");
@@ -20,15 +18,17 @@ void readSoilMoisture(void *voidZonePtr)
     //Read soil moisture
     for (int i = 0; i < SOIL_SAMPLE_SIZE; i++)
     {
-        reading = adc1_get_raw(zonePtr->sensorPin); //make this more efficient by removing the reading variable and just writing sum += adc1_get_raw(zonePtr->sensorPin);
-        ESP_LOGD(TAG, "reading is: %d", reading);   
+        reading = adc1_get_raw(zonePtr->sensorPin); //make this more efficient by removing the reading variable and
+        ESP_LOGD(TAG, "reading is: %d", reading);   //just writing sum += adc1_get_raw(zonePtr->sensorPin);
         sum += reading;
 
         vTaskDelay(10/portTICK_PERIOD_MS);
     }
     
     //return average and delete
+    //*(int *)ptrToSoilMoisture = sum/SOIL_SAMPLE_SIZE;
     zonePtr->soilMoisture = sum/SOIL_SAMPLE_SIZE;
+
     vTaskDelete(NULL);
 }
 
