@@ -55,7 +55,8 @@ void app_main(void)
         };
     #endif
 
-    uint64_t pinBitMask = BIT_MASK;
+    gpio_config_t output_config;
+    output_config.pin_bit_mask = BIT_MASK;
 
     //zone initialization
     zone_t zones[NUM_ZONES];
