@@ -5,8 +5,10 @@
 #include "include/soilZones.h"
 #include "include/localWeather.h"
 
-#if !NUM_ZONES
+#if NUM_ZONES < 1
     #error "You must have at least one zone setup"
+#elif NUM_ZONES > 4
+    #error "This program only supports up to 4 zones, make sure to add more yourself and remove this compilation guard"
 #endif
 
 #ifdef SHT30_ENABLE
