@@ -4,17 +4,16 @@
 #include "include/settings.h"
 #include "include/soilZones.h"
 #include "include/localWeather.h"
+#ifdef SHT30_ENABLE
+
+    #include "include/localWeather.h"
+
+#endif
 
 #if NUM_ZONES < 1
     #error "You must have at least one zone setup"
 #elif NUM_ZONES > 4
     #error "This program only supports up to 4 zones, make sure to add more yourself and remove this compilation guard"
-#endif
-
-#ifdef SHT30_ENABLE
-
-    #include "include/localWeather.h"
-
 #endif
 
 void app_main(void)
@@ -27,7 +26,7 @@ void app_main(void)
         {SOIL_SENSOR_3, SOIL_VALVE_3, WATERING_THRESHOLD_3}
     };
 
-    gpio_config_t output_config;
+    gpio_config_t output_config = {};
     output_config.pin_bit_mask = 0;
 
     //zone initialization
@@ -52,9 +51,11 @@ void app_main(void)
 
     #endif
 
+    gpio_config(&output_config);
+
     //start logging and read soil moisture test
     static const char *TAG = "main";
-    ESP_LOGI(TAG, "Hello from main");
+    ESP_LOGI(TAG, "Hello from main, bitmask is: %i", output_config.pin_bit_mask);
 
     while (1)
     {
